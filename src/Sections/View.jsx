@@ -3,11 +3,11 @@ import styled from "styled-components";
 const ViewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-  align-items: flex-start; 
+  justify-content: space-between;
+  align-items: flex-start;
   background-color: white;
   width: 80vw;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   outline: 2px solid #000;
   padding: 20px;
   box-shadow: 6px 6px 0px 0px black;
@@ -29,7 +29,7 @@ const LikeButton = styled.button`
   border: none;
   margin-top: 10px;
   border-radius: 50%;
-  align-self: flex-start; 
+  align-self: flex-start;
   cursor: pointer;
   transition: background-color 0.3s ease;
   &:hover {
@@ -37,15 +37,11 @@ const LikeButton = styled.button`
   }
 `;
 
-const LikeCount = styled.div``;
-
-export const View = () => {
+export const View = ({ happyThought }) => {
   return (
     <ViewContainer>
       <TextField>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae
-        consequuntur deleniti dolor sed dolorum! Suscipit iusto beatae voluptate
-        fugiat illum.
+        {happyThought || "Your happy thought will appear here..."}
       </TextField>
       <LikeButton>❤️</LikeButton>
     </ViewContainer>
