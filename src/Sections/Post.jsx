@@ -14,7 +14,7 @@ const PostContainer = styled.div`
   width: 80vw;
 
   box-sizing: border-box; 
-`
+`;
 
 const Title = styled.h2`
   font-size: 16px;
@@ -22,7 +22,7 @@ const Title = styled.h2`
   font-weight: 500;
   font-family: Roboto, sans-serif;
   letter-spacing: 0.2px;
-`
+`;
 
 export const Post = () => {
   return (
@@ -31,4 +31,4 @@ export const Post = () => {
       <Form />
     </PostContainer>
   );
-}
+};

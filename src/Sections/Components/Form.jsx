@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SubmitButton } from "./Submit";
 
-export const Form = ({ onSubmit }) => {
-  const [text, setText] = useState(""); // Local state to manage the textarea input
-
-  const TextArea = styled.textarea`
+export const Form = () => {
+  const InputArea = styled.input`
     width: 90%;
     border: 2px solid #7a7b7b;
     padding: 10px;
@@ -19,23 +16,46 @@ export const Form = ({ onSubmit }) => {
     }
   `;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (text.trim()) {
-      onSubmit(text); // Pass the text to the parent component
-      setText(""); // Clear the textarea
-    }
-  };
+  const SubmitButtonContainer = styled.div`
+    display: flex;
+    justify-content: left;
+    margin: 10px;
+  `;
 
+  const Button = styled.button`
+    background-color: #fdafaf;
+    color: #000;
+    font-weight: 600;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: Roboto, sans-serif;
+    letter-spacing: 0.2px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  `;
+
+  const TextInput = () => {
+    const [inputValue, setInputValue] = useState("");
+
+    const handleInputChange = (event) => {
+      setInputValue(event.target.value);
+    };
+  }
   return (
-    <form onSubmit={handleSubmit}>
-      <TextArea
-        placeholder="Type your happy thought here..."
-        maxLength="140"
-        value={text}
-        onChange={(e) => setText(e.target.value)} // Update local state on input change
-      ></TextArea>
-      <SubmitButton type="submit">Send Happy Thought</SubmitButton>
+    <form>
+      <InputArea type="input"
+        value={inputValue}
+        onChange={handleInputChange}
+        placeholder="Type your happy thought here..." />
+      <SubmitButtonContainer>
+        <Button>❤️ Send Happy Thought ❤️</Button>
+      </SubmitButtonContainer>
+
     </form>
   );
 };

@@ -37,12 +37,10 @@ const LikeButton = styled.button`
   }
 `;
 
-export const View = ({ happyThought }) => {
+export const View = () => {
   return (
     <ViewContainer>
-      <TextField>
-        {happyThought || "Your happy thought will appear here..."}
-      </TextField>
+      <TextField>Your happy thought will appear here...</TextField>
       <LikeButton>❤️</LikeButton>
     </ViewContainer>
   );
