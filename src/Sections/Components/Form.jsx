@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { SubmitButton } from "./Submit";
 
 export const Form = () => {
+<<<<<<< HEAD
 
   const TextArea = styled.textarea`
     width: 90%;
@@ -18,6 +19,9 @@ export const Form = () => {
     }
   `;
 
+=======
+  const FormContainer = styled.div``;
+>>>>>>> 5fcdef672e57fbf060c741a786ea501bcc8cdd17
   return (
     <form>
       <TextArea
@@ -28,4 +32,4 @@ export const Form = () => {
 
     </form>
   );
-}
+};
