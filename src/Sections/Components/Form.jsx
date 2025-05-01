@@ -5,7 +5,7 @@ export const Form = () => {
 
   const TextArea = styled.textarea`
     width: 90%;
-    height: 60px;
+
     border: 2px solid #7a7b7b;
     padding: 10px;
     font-size: 16px;

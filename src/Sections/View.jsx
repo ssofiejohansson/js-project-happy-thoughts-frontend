@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
 const ViewContainer = styled.div`
-  position: relative; /* Needed for absolute positioning of LikeButton */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  align-items: flex-start; 
   background-color: white;
-  width: 600px;
-  height: 200px;
+  width: 80vw;
+  box-sizing: border-box; 
   border: 1px solid;
   padding: 20px;
   box-shadow: 6px 6px 0px 0px black;
@@ -14,22 +17,19 @@ const TextField = styled.div`
   background-color: white;
   font-family: monospace;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   width: 100%;
-  height: 25%;
-  align-self: top;
 `;
 
 const LikeButton = styled.button`
-  position: absolute; /* Absolute to position it inside ViewContainer */
-  font-size: 28px;
-  bottom: 10px;
-  left: 10px;
+  font-size: 24px;
   background-color: #ebebeb;
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   border: none;
+  margin-top: 10px;
   border-radius: 50%;
+  align-self: flex-start; 
 `;
 
 const LikeCount = styled.div``;
