@@ -1,17 +1,32 @@
 import styled from "styled-components";
+import { SubmitButton } from "./Submit";
 
 export const Form = () => {
-  const FormContainer = styled.div``;
+
+  const TextArea = styled.textarea`
+    width: 90%;
+    height: 60px;
+    border: 2px solid #7a7b7b;
+    padding: 10px;
+    font-size: 16px;
+ 
+    &:focus {
+      outline: none;
+      color: #000;
+      border-color: #7a7b7b;
+      box-shadow: 0 0 5px #7a7b7b;
+    }
+  `;
+ 
+
   return (
-    <FormContainer>
-      <h2>Share your happy thought!</h2>
-      <form>
-        <textarea
-          placeholder="What makes you happy?"
-          maxLength="140"
-        ></textarea>
-        <button type="submit">Send Happy Thought</button>
-      </form>
-    </FormContainer>
+    <form>
+      <TextArea
+        placeholder="React is making me happy!"
+        maxLength="140"
+      ></TextArea>
+      <SubmitButton type="submit">Send Happy Thought</SubmitButton>
+
+    </form>
   );
 };
