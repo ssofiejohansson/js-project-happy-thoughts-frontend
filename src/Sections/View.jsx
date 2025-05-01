@@ -8,7 +8,7 @@ const ViewContainer = styled.div`
   background-color: white;
   width: 80vw;
   box-sizing: border-box; 
-  border: 1px solid;
+  outline: 2px solid #000;
   padding: 20px;
   box-shadow: 6px 6px 0px 0px black;
 `;
@@ -30,6 +30,11 @@ const LikeButton = styled.button`
   margin-top: 10px;
   border-radius: 50%;
   align-self: flex-start; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const LikeCount = styled.div``;
