@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const Form = () => {
-
-  const FormContainer = styled.div`
-  `
+  const FormContainer = styled.div``;
   return (
     <FormContainer>
       <h2>Share your happy thought!</h2>
@@ -16,4 +14,4 @@ export const Form = () => {
       </form>
     </FormContainer>
   );
-}
+};
