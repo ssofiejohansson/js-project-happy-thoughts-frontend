@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Post } from "./Sections/Post";
 import { View } from "./Sections/View";
 import styled from "styled-components";
@@ -22,11 +22,17 @@ const Heading = styled.h1`
 `;
 
 export const App = () => {
+  const [happyThought, setHappyThought] = useState("");
+
+  const handleFormSubmit = (text) => {
+    setHappyThought(text);
+  };
+
   return (
     <Container>
       <Heading>Happy Thoughts ❤️</Heading>
-      <Post />
-      <View />
+      <Post onSubmit={handleFormSubmit} />
+      <View happyThought={happyThought} />
     </Container>
   );
 };
