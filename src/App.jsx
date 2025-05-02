@@ -24,14 +24,13 @@ const Heading = styled.h1`
 export const App = () => {
   const [happyThoughts, setHappyThoughts] = useState([]);
 
-  const handleFormSubmit = (text) => {
-    setHappyThoughts((prevThoughts) => [text, ...prevThoughts]);
+  const handleFormSubmit = (newThought) => {
+    setHappyThoughts((prevThoughts) => [newThought, ...prevThoughts]);
   };
 
   const handleReset = () => {
     setHappyThoughts([]);
   };
-
 
   return (
     <Container>

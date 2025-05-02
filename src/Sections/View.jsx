@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TimeAgo from "./Components/TimeAgo";
 
 const ViewContainer = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const ViewContainer = styled.div`
   outline: 2px solid #000;
   padding: 20px;
   box-shadow: 6px 6px 0px 0px black;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 
   @media (min-width: 768px) {
     max-width: 600px;
@@ -45,7 +46,7 @@ export const LikeButton = styled.button`
 
 const ResetButton = styled.button`
   background-color: #fdafaf;
-  color: #FFF;
+  color: #fff;
   font-weight: 600;
   border: none;
   padding: 10px 20px;
@@ -56,7 +57,7 @@ const ResetButton = styled.button`
   letter-spacing: 0.2px;
 
   &:hover {
-   transform: scale(1.1);
+    transform: scale(1.1);
   }
 `;
 
@@ -66,8 +67,9 @@ export const View = ({ happyThoughts, onReset }) => {
       {happyThoughts.length > 0 ? (
         happyThoughts.map((thought, index) => (
           <ViewContainer key={index}>
-            <TextField>{thought}</TextField>
+            <TextField>{thought.text}</TextField>
             <LikeButton>❤️</LikeButton>
+            <TimeAgo timestamp={thought.timestamp} />
           </ViewContainer>
         ))
       ) : (
