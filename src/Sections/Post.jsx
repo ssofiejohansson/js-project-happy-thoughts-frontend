@@ -33,6 +33,7 @@ const InputArea = styled.textarea`
   border: 2px solid #7a7b7b;
   padding: 10px;
   font-size: 16px;
+  resize: none;
 
   &:focus {
     outline: none;
@@ -65,8 +66,21 @@ const Button = styled.button`
   }
 `;
 
+const LikeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
+const LikeCount = styled.span`
+  font-size: 15px;
+  color: #7a7b7b;
+`;
+
 export const Post = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState("");
+  const [likeCount, setLikeCount] = useState(0);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -78,6 +92,10 @@ export const Post = ({ onSubmit }) => {
       onSubmit(inputValue);
       setInputValue("");
     }
+  };
+
+  const handleLike = () => {
+    setLikeCount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -93,7 +111,10 @@ export const Post = ({ onSubmit }) => {
           <Button type="submit">❤️ Send Happy Thought ❤️</Button>
         </SubmitButtonContainer>
       </form>
-      <LikeButton>❤️</LikeButton>
+      <LikeContainer>
+        <LikeButton onClick={handleLike}>❤️</LikeButton>
+        <LikeCount>x {likeCount}</LikeCount>
+      </LikeContainer>
     </PostContainer>
   );
 };

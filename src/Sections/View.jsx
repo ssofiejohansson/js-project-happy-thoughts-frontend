@@ -39,7 +39,7 @@ export const LikeButton = styled.button`
   cursor: pointer;
   transition: background-color 0.3s ease;
   &:hover {
-    transform: scale(1.1);
+    background-color: #fdafaf;
   }
 `;
 
