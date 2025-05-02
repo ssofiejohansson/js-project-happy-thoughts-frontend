@@ -14,7 +14,6 @@ const PostContainer = styled.div`
   width: 80vw;
   box-sizing: border-box;
 
-
   @media (min-width: 768px) {
     max-width: 600px;
   }
@@ -75,7 +74,11 @@ export const Post = ({ onSubmit }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (inputValue.trim()) {
-      onSubmit(inputValue);
+      const newThought = {
+        text: inputValue,
+        timestamp: new Date().toISOString(), // Adding timestamp here
+      };
+      onSubmit(newThought);
       setInputValue("");
     }
   };
