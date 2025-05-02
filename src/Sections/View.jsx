@@ -27,7 +27,7 @@ const TextField = styled.div`
   margin-bottom: 10px;
 `;
 
-const LikeButton = styled.button`
+export const LikeButton = styled.button`
   font-size: 24px;
   background-color: #ebebeb;
   width: 50px;

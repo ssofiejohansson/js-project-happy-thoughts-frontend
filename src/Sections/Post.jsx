@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { LikeButton } from "./View";
 
 const PostContainer = styled.div`
   display: flex;
@@ -92,6 +93,7 @@ export const Post = ({ onSubmit }) => {
           <Button type="submit">❤️ Send Happy Thought ❤️</Button>
         </SubmitButtonContainer>
       </form>
+      <LikeButton>❤️</LikeButton>
     </PostContainer>
   );
 };
