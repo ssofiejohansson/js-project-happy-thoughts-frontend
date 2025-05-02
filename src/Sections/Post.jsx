@@ -12,6 +12,11 @@ const PostContainer = styled.div`
   box-shadow: 8px 8px 0px #000;
   width: 80vw;
   box-sizing: border-box;
+
+
+  @media (min-width: 768px) {
+    max-width: 600px;
+  }
 `;
 
 const Title = styled.h2`
@@ -60,10 +65,10 @@ const Button = styled.button`
 `;
 
 export const Post = ({ onSubmit }) => {
-  const [inputValue, setInputValue] = useState(""); // Local state to manage the input
+  const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value); // Update local state on input change
+    setInputValue(event.target.value);
   };
 
   const handleSubmit = (event) => {

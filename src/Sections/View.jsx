@@ -11,6 +11,11 @@ const ViewContainer = styled.div`
   outline: 2px solid #000;
   padding: 20px;
   box-shadow: 6px 6px 0px 0px black;
+  margin-bottom: 20px; 
+
+  @media (min-width: 768px) {
+    max-width: 600px;
+  }
 `;
 
 const TextField = styled.div`
@@ -19,6 +24,7 @@ const TextField = styled.div`
   font-weight: 500;
   font-size: 16px;
   width: 100%;
+  margin-bottom: 10px;
 `;
 
 const LikeButton = styled.button`
@@ -37,11 +43,42 @@ const LikeButton = styled.button`
   }
 `;
 
-export const View = ({ happyThought }) => {
+const ResetButton = styled.button`
+  background-color: #fdafaf;
+  color: #FFF;
+  font-weight: 600;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+  letter-spacing: 0.2px;
+
+  &:hover {
+   transform: scale(1.1);
+  }
+`;
+
+export const View = ({ happyThoughts, onReset }) => {
   return (
-    <ViewContainer>
-      <TextField>{happyThought || "Your happy thought will appear here"}</TextField>
-      <LikeButton>❤️</LikeButton>
-    </ViewContainer>
+    <>
+      {happyThoughts.length > 0 ? (
+        happyThoughts.map((thought, index) => (
+          <ViewContainer key={index}>
+            <TextField>{thought}</TextField>
+            <LikeButton>❤️</LikeButton>
+          </ViewContainer>
+        ))
+      ) : (
+        <ViewContainer>
+          <TextField>Your happy thoughts will appear here</TextField>
+          <LikeButton>❤️</LikeButton>
+        </ViewContainer>
+      )}
+      {happyThoughts.length > 0 && (
+        <ResetButton onClick={onReset}>💔 Remove All Thoughts 💔</ResetButton>
+      )}
+    </>
   );
 };

@@ -22,17 +22,22 @@ const Heading = styled.h1`
 `;
 
 export const App = () => {
-  const [happyThought, setHappyThought] = useState("");
+  const [happyThoughts, setHappyThoughts] = useState([]);
 
   const handleFormSubmit = (text) => {
-    setHappyThought(text);
+    setHappyThoughts((prevThoughts) => [text, ...prevThoughts]);
   };
+
+  const handleReset = () => {
+    setHappyThoughts([]);
+  };
+
 
   return (
     <Container>
-      <Heading>Happy Thoughts ❤️</Heading>
+      <Heading>Welcome to Happy Thoughts ❤️</Heading>
       <Post onSubmit={handleFormSubmit} />
-      <View happyThought={happyThought} />
+      <View happyThoughts={happyThoughts} onReset={handleReset} />
     </Container>
   );
 };
