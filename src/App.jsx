@@ -12,8 +12,7 @@ const Container = styled.div`
   gap: 30px;
 `;
 
-const Heading = styled.h1`
-  font-size: 24px;
+const BaseHeading = styled.h1`
   color: #000;
   text-align: center;
   font-weight: 500;
@@ -21,10 +20,28 @@ const Heading = styled.h1`
   letter-spacing: 0.2px;
 `;
 
+const Heading = styled(BaseHeading)`
+  font-size: 24px;
+`;
+
+const SubHeading = styled(BaseHeading)`
+  font-size: 16px;
+`;
+
+const RedText = styled.span`
+  color: #E63946;
+`;
+
+
 export const App = () => {
   const [happyThoughts, setHappyThoughts] = useState([]);
 
-  const handleFormSubmit = (newThought) => {
+  const handleFormSubmit = (text) => {
+    const newThought = {
+      text,
+      timestamp: new Date().toISOString(),
+      likeCount: 0,
+    };
     setHappyThoughts((prevThoughts) => [newThought, ...prevThoughts]);
   };
 
@@ -35,6 +52,7 @@ export const App = () => {
   return (
     <Container>
       <Heading>Welcome to Happy Thoughts ❤️</Heading>
+      <SubHeading>Trying to make the world a better place, <RedText>one thought at a time.</RedText></SubHeading>
       <Post onSubmit={handleFormSubmit} />
       <View happyThoughts={happyThoughts} onReset={handleReset} />
     </Container>
