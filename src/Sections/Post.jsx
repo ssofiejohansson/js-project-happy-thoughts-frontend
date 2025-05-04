@@ -66,16 +66,34 @@ const Button = styled.button`
 
 export const Post = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState("");
+
+  const maxLength = 140;
+  const charCount = inputValue.length;
+  const charsLeft = maxLength - charCount;
+  const counterColor = charsLeft < 0 ? "red" : "#333";
 
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    const value = event.target.value;
+    setInputValue(value);
+
+    if (value.length > maxLength) {
+      setError("Character limit exceeded");
+    } else {
+      setError("");
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (inputValue.trim()) {
-      onSubmit(inputValue);
+    if (inputValue.trim() && inputValue.length <= maxLength) {
+      const newThought = {
+        text: inputValue,
+        timestamp: new Date().toISOString(),
+      };
+      onSubmit(newThought);
+
       setInputValue("");
     }
   };
@@ -89,8 +107,16 @@ export const Post = ({ onSubmit }) => {
           onChange={handleInputChange}
           placeholder="Type your happy thought here"
         />
+        <div style={{ color: counterColor }}>
+          {charsLeft >= 0
+            ? `${charCount} / ${maxLength}`
+            : `${charsLeft} characters over limit`}
+        </div>
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <SubmitButtonContainer>
-          <Button type="submit">❤️ Send Happy Thought ❤️</Button>
+          <Button type="submit" disabled={inputValue.length === 0}>
+            ❤️ Send Happy Thought ❤️
+          </Button>
         </SubmitButtonContainer>
       </form>
 
