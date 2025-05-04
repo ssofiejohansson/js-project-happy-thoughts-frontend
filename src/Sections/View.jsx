@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import TimeAgo from "./Components/TimeAgo";
+import { LikeBtn } from "./Components/LikeBtn";
 
 const ViewContainer = styled.div`
   display: flex;
@@ -28,31 +29,22 @@ const TextField = styled.div`
   margin-bottom: 10px;
 `;
 
-export const LikeButton = styled.button`
-  font-size: 24px;
-  background-color: #ebebeb;
-  width: 50px;
-  height: 50px;
-  border: none;
-  margin-top: 10px;
-  border-radius: 50%;
-  align-self: flex-start;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  &:hover {
-    transform: scale(1.1);
-  }
+const ActionsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
 
 const ResetButton = styled.button`
-  background-color: #fdafaf;
-  color: #fff;
+  background-color: #fff;
+  color: #E63946;
   font-weight: 600;
-  border: none;
+  border: 3px solid #fdafaf;
   padding: 10px 20px;
   border-radius: 50px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-family: Roboto, sans-serif;
   letter-spacing: 0.2px;
 
@@ -64,20 +56,16 @@ const ResetButton = styled.button`
 export const View = ({ happyThoughts, onReset }) => {
   return (
     <>
-      {happyThoughts.length > 0 ? (
+      {happyThoughts.length > 0 &&
         happyThoughts.map((thought, index) => (
           <ViewContainer key={index}>
             <TextField>{thought.text}</TextField>
-            <LikeButton>❤️</LikeButton>
-            <TimeAgo timestamp={thought.timestamp} />
+            <ActionsWrapper>
+              <LikeBtn />
+              <TimeAgo timestamp={thought.timestamp} />
+            </ActionsWrapper>
           </ViewContainer>
-        ))
-      ) : (
-        <ViewContainer>
-          <TextField>Your happy thoughts will appear here</TextField>
-          <LikeButton>❤️</LikeButton>
-        </ViewContainer>
-      )}
+        ))}
       {happyThoughts.length > 0 && (
         <ResetButton onClick={onReset}>💔 Remove All Thoughts 💔</ResetButton>
       )}

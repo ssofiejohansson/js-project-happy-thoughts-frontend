@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { LikeButton } from "./View";
 
 const PostContainer = styled.div`
   display: flex;
@@ -32,6 +31,7 @@ const InputArea = styled.textarea`
   border: 2px solid #7a7b7b;
   padding: 10px;
   font-size: 16px;
+  resize: none;
 
   &:focus {
     outline: none;
@@ -73,6 +73,7 @@ export const Post = ({ onSubmit }) => {
   const charsLeft = maxLength - charCount;
   const counterColor = charsLeft < 0 ? "red" : "#333";
 
+
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInputValue(value);
@@ -92,6 +93,7 @@ export const Post = ({ onSubmit }) => {
         timestamp: new Date().toISOString(),
       };
       onSubmit(newThought);
+
       setInputValue("");
     }
   };
@@ -117,7 +119,7 @@ export const Post = ({ onSubmit }) => {
           </Button>
         </SubmitButtonContainer>
       </form>
-      <LikeButton>❤️</LikeButton>
+
     </PostContainer>
   );
 };

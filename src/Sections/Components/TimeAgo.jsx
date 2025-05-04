@@ -1,13 +1,19 @@
 import React from "react";
+import styled from "styled-components";
+
+const Text = styled.span`
+  color: #7a7b7b;
+    font-size: 15px;
+`
 
 const TimeAgo = ({ timestamp }) => {
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
-  if (isNaN(date)) return <span>Invalid date</span>; // Rendered as a span element
+  if (isNaN(date)) return <Text>Invalid date</Text>; // Rendered as a span element
 
   const now = new Date();
   const seconds = Math.floor((now - date) / 1000);
 
-  if (seconds < 5) return <span>just now</span>;
+  if (seconds < 5) return <Text>just now</Text>;
 
   const intervals = {
     year: 31536000,
@@ -23,11 +29,11 @@ const TimeAgo = ({ timestamp }) => {
     const count = Math.floor(seconds / value);
     if (count >= 1) {
       const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
-      return <span>{rtf.format(-count, unit)}</span>;
+      return <Text>{rtf.format(-count, unit)}</Text>;
     }
   }
 
-  return <span>just now</span>;
+  return <Text>just now</Text>;
 };
 
 export default TimeAgo;
