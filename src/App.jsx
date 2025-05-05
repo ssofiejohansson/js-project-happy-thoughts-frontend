@@ -29,20 +29,18 @@ const SubHeading = styled(BaseHeading)`
 `;
 
 const RedText = styled.span`
-  color: #E63946;
+  color: #e63946;
 `;
-
 
 export const App = () => {
   const [happyThoughts, setHappyThoughts] = useState([]);
 
-  const handleFormSubmit = (text) => {
-    const newThought = {
-      text,
-      timestamp: new Date().toISOString(),
+  const handleFormSubmit = (newThought) => {
+    const extendedThought = {
+      ...newThought,
       likeCount: 0,
     };
-    setHappyThoughts((prevThoughts) => [newThought, ...prevThoughts]);
+    setHappyThoughts((prevThoughts) => [extendedThought, ...prevThoughts]);
   };
 
   const handleReset = () => {
@@ -52,7 +50,10 @@ export const App = () => {
   return (
     <Container>
       <Heading>Welcome to Happy Thoughts ❤️</Heading>
-      <SubHeading>Trying to make the world a better place, <RedText>one thought at a time.</RedText></SubHeading>
+      <SubHeading>
+        Trying to make the world a better place,{" "}
+        <RedText>one thought at a time.</RedText>
+      </SubHeading>
       <Post onSubmit={handleFormSubmit} />
       <View happyThoughts={happyThoughts} onReset={handleReset} />
     </Container>
