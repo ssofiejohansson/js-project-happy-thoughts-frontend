@@ -10,11 +10,11 @@ const PostContainer = styled.div`
   background-color: #f2f0f0;
   outline: 2px solid #000;
   box-shadow: 8px 8px 0px #000;
-  width: 80vw;
+  width: 90vw;
   box-sizing: border-box;
 
   @media (min-width: 768px) {
-    max-width: 600px;
+    max-width: 700px;
   }
 `;
 
@@ -43,8 +43,15 @@ const InputArea = styled.textarea`
 
 const SubmitButtonContainer = styled.div`
   display: flex;
-  justify-content: left;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   margin: 10px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 const Button = styled.button`
@@ -53,11 +60,14 @@ const Button = styled.button`
   font-weight: 600;
   border: none;
   padding: 10px 20px;
+  height: 45px;
+  width: 250px;
   border-radius: 50px;
   cursor: pointer;
   font-size: 14px;
   font-family: Roboto, sans-serif;
   letter-spacing: 0.2px;
+  margin: 10px;
 
   &:hover {
     transform: scale(1.1);
@@ -94,7 +104,7 @@ export const Post = ({ onSubmit }) => {
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInputValue(value);
-    setError(value.length > maxLength ? "Character limit exceeded" : "");
+    setError(value.length > maxLength ? "Your message is too long" : "");
   };
 
   const handleSubmit = (event) => {
@@ -115,7 +125,7 @@ export const Post = ({ onSubmit }) => {
     const circumference = 2 * Math.PI * radius;
     const progress = Math.min(charCount / maxLength, 1);
     const strokeDashoffset = circumference * (1 - progress);
-    const strokeColor = charsLeft < 0 ? "red" : "#4caf50";
+    const strokeColor = charsLeft < 0 ? "#e63946" : "#7a7b7b";
 
     return (
       <CircleWrapper>
@@ -155,19 +165,15 @@ export const Post = ({ onSubmit }) => {
           onChange={handleInputChange}
           placeholder="Type your happy thought here"
         />
-        {renderProgressCircle()}
-        {/* <div style={{ color: counterColor }}>
-          <p>
-            {charsLeft >= 0
-              ? `${charCount} / ${maxLength}`
-              : `${charsLeft} characters over limit`}
-          </p>
-        </div> */}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+
         <SubmitButtonContainer>
           <Button type="submit" disabled={inputValue.length === 0}>
             ❤️ Send Happy Thought ❤️
           </Button>
+          <div>
+            {renderProgressCircle()}
+            {error && <p style={{ color: "#e63946", fontSize: "11px" }}>{error}</p>}
+          </div>
         </SubmitButtonContainer>
       </form>
     </PostContainer>
