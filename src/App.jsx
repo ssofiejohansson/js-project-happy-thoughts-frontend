@@ -35,12 +35,13 @@ const RedText = styled.span`
 export const App = () => {
   const [happyThoughts, setHappyThoughts] = useState([]);
 
-  const handleFormSubmit = (newThought) => {
-    const extendedThought = {
-      ...newThought,
+  const handleFormSubmit = (text) => {
+    const newThought = {
+      text,
+      timestamp: new Date().toISOString(),
       likeCount: 0,
     };
-    setHappyThoughts((prevThoughts) => [extendedThought, ...prevThoughts]);
+    setHappyThoughts((prevThoughts) => [newThought, ...prevThoughts]);
   };
 
   const handleReset = () => {
