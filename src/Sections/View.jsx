@@ -38,7 +38,7 @@ const ActionsWrapper = styled.div`
 
 const ResetButton = styled.button`
   background-color: #fff;
-  color: #E63946;
+  color: #e63946;
   font-weight: 600;
   border: 3px solid #fdafaf;
   padding: 10px 20px;
