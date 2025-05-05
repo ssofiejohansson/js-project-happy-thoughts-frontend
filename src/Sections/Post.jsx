@@ -71,7 +71,7 @@ export const Post = ({ onSubmit }) => {
   const maxLength = 140;
   const charCount = inputValue.length;
   const charsLeft = maxLength - charCount;
-  const counterColor = charsLeft < 0 ? "red" : "#333";
+  const counterColor = charsLeft < 0 ? "#E63946" : "#333";
 
 
   const handleInputChange = (event) => {
