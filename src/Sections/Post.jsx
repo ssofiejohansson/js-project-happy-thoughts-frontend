@@ -10,11 +10,11 @@ const PostContainer = styled.div`
   background-color: #f2f0f0;
   outline: 2px solid #000;
   box-shadow: 8px 8px 0px #000;
-  width: 90vw;
+  width: 80vw;
   box-sizing: border-box;
 
   @media (min-width: 768px) {
-    max-width: 700px;
+    max-width: 600px;
   }
 `;
 
@@ -43,15 +43,10 @@ const InputArea = styled.textarea`
 
 const SubmitButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  margin: 10px;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: space-between;
-  }
 `;
 
 const Button = styled.button`
@@ -59,12 +54,11 @@ const Button = styled.button`
   color: #000;
   font-weight: 600;
   border: none;
-  padding: 10px 20px;
-  height: 45px;
-  width: 250px;
+  padding: 6px 12px;
+
   border-radius: 50px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-family: Roboto, sans-serif;
   letter-spacing: 0.2px;
   margin: 10px;

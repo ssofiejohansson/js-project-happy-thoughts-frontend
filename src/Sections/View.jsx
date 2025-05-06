@@ -8,7 +8,7 @@ const ViewContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   background-color: white;
-  width: 90vw;
+  width: 80vw;
   box-sizing: border-box;
   outline: 2px solid #000;
   padding: 20px;
@@ -16,7 +16,7 @@ const ViewContainer = styled.div`
   margin-bottom: 20px;
 
   @media (min-width: 768px) {
-    max-width: 700px;
+    max-width: 600px;
   }
 `;
 
@@ -67,7 +67,7 @@ export const View = ({ happyThoughts, onReset }) => {
           </ViewContainer>
         ))}
       {happyThoughts.length > 0 && (
-        <ResetButton onClick={onReset}>💔 Remove All Thoughts 💔</ResetButton>
+        <ResetButton onClick={onReset}>💔 Clear All Thoughts 💔</ResetButton>
       )}
     </>
   );
