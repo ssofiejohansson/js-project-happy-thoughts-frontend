@@ -166,7 +166,9 @@ export const Post = ({ onSubmit }) => {
           </Button>
           <div>
             {renderProgressCircle()}
-            {error && <p style={{ color: "#e63946", fontSize: "11px" }}>{error}</p>}
+            {error && (
+              <p style={{ color: "#e63946", fontSize: "11px" }}>{error}</p>
+            )}
           </div>
         </SubmitButtonContainer>
       </form>
