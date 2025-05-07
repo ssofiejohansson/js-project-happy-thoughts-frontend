@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TimeAgo from "./Components/TimeAgo";
 import { LikeBtn } from "./Components/LikeBtn";
@@ -53,21 +54,36 @@ const ResetButton = styled.button`
   }
 `;
 
-export const View = ({ happyThoughts, onReset }) => {
+export const View = ({ onReset }) => {
+  const [thoughts, setHappyThoughts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts")
+      .then((res) => res.json())
+      .then((data) => setHappyThoughts(data))
+      .catch((err) => console.error("Failed to fetch thoughts:", err));
+  }, []);
+
   return (
     <>
-      {happyThoughts.length > 0 &&
-        happyThoughts.map((thought, index) => (
-          <ViewContainer key={index}>
+      {thoughts.length > 0 &&
+        thoughts.map((thought) => (
+          <ViewContainer key={thought._id}>
             <TextField>{thought.text}</TextField>
+
             <ActionsWrapper>
               <LikeBtn />
-              <TimeAgo timestamp={thought.timestamp} />
+              <TimeAgo timestamp={thought.createdAt} />
             </ActionsWrapper>
+
+            {/* Render the message */}
+            <p>{thought.message}</p>
           </ViewContainer>
         ))}
-      {happyThoughts.length > 0 && (
-        <ResetButton onClick={onReset}>💔 Clear All Thoughts 💔</ResetButton>
+      {thoughts.length > 0 && (
+        <ResetButton onClick={() => setHappyThoughts([])}>
+          💔 Clear All Thoughts 💔
+        </ResetButton>
       )}
     </>
   );

@@ -35,13 +35,6 @@ const RedText = styled.span`
 export const Thoughts = () => {
   const [happyThoughts, setHappyThoughts] = useState([]);
 
-  useEffect(() => {
-    fetch("https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts")
-      .then((res) => res.json())
-      .then((data) => setHappyThoughts(data))
-      .catch((err) => console.error("Failed to fetch thoughts:", err));
-  }, []);
-
   const handleFormSubmit = (newThought) => {
     setHappyThoughts((prevThoughts) => [newThought, ...prevThoughts]);
   };
@@ -58,10 +51,6 @@ export const Thoughts = () => {
         <RedText>one thought at a time.</RedText>
       </SubHeading>
       <Post onSubmit={handleFormSubmit} />
-      {/* 👇 Render message from API */}
-      {happyThoughts.map((thought) => (
-        <p key={thought._id}>{thought.message}</p>
-      ))}
       <View happyThoughts={happyThoughts} onReset={handleReset} />
     </Container>
   );
