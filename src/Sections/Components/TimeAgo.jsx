@@ -6,7 +6,7 @@ const Text = styled.span`
     font-size: 15px;
 `
 
-const TimeAgo = ({ timestamp }) => {
+export const TimeAgo = ({ timestamp }) => {
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
   if (isNaN(date)) return <Text>Invalid date</Text>; // Rendered as a span element
 
@@ -36,4 +36,3 @@ const TimeAgo = ({ timestamp }) => {
   return <Text>just now</Text>;
 };
 
-export default TimeAgo;

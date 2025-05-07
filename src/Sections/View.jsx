@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import TimeAgo from "./Components/TimeAgo";
+import { TimeAgo } from "./Components/TimeAgo";
 import { LikeBtn } from "./Components/LikeBtn";
 
 const ViewContainer = styled.div`
@@ -37,54 +37,24 @@ const ActionsWrapper = styled.div`
   width: 100%;
 `;
 
-const ResetButton = styled.button`
-  background-color: #fff;
-  color: #e63946;
-  font-weight: 600;
-  border: 3px solid #fdafaf;
-  padding: 10px 20px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 12px;
-  font-family: Roboto, sans-serif;
-  letter-spacing: 0.2px;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-export const View = ({ onReset }) => {
-  const [thoughts, setHappyThoughts] = useState([]);
-
-  useEffect(() => {
-    fetch("https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts")
-      .then((res) => res.json())
-      .then((data) => setHappyThoughts(data))
-      .catch((err) => console.error("Failed to fetch thoughts:", err));
-  }, []);
-
+export const View = ({ thoughts, onLike }) => {
   return (
     <>
       {thoughts.length > 0 &&
         thoughts.map((thought) => (
           <ViewContainer key={thought._id}>
-            <TextField>{thought.text}</TextField>
+            <TextField>{thought.message}</TextField>
 
             <ActionsWrapper>
-              <LikeBtn />
+              <LikeBtn
+                thoughtId={thought._id}
+                hearts={thought.hearts}
+                onLike={onLike}
+              />
               <TimeAgo timestamp={thought.createdAt} />
             </ActionsWrapper>
-
-            {/* Render the message */}
-            <p>{thought.message}</p>
           </ViewContainer>
         ))}
-      {thoughts.length > 0 && (
-        <ResetButton onClick={() => setHappyThoughts([])}>
-          💔 Clear All Thoughts 💔
-        </ResetButton>
-      )}
     </>
   );
 };

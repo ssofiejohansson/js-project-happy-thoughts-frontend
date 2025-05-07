@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const LikeButton = styled.button`
   font-size: 24px;
-  background-color: ${(props) => (props.liked ? "#fdafaf" : "#ebebeb")};
+  background-color: ${(props) => (props.$liked ? "#fdafaf" : "#ebebeb")};
   width: 50px;
   height: 50px;
   border: none;
@@ -30,18 +30,39 @@ const LikeContainer = styled.div`
   margin-top: 10px;
 `;
 
-export const LikeBtn = () => {
-  const [likeCount, setLikeCount] = useState(0);
+export const LikeBtn = ({ thoughtId, hearts }) => {
+  const [likeCount, setLikeCount] = useState(hearts);
   const [liked, setLiked] = useState(false);
 
-  const handleLike = () => {
-    setLikeCount((prevCount) => prevCount + 1);
-    setLiked(true);
+  const handleLike = async () => {
+    console.log("Sending like to:", thoughtId);
+
+    try {
+      const response = await fetch(
+        `https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts/${thoughtId}/like`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        console.log("Thought liked successfully!");
+        setLikeCount(likeCount + 1);
+        setLiked(true);
+      } else {
+        console.error("Failed to like the thought");
+      }
+    } catch (error) {
+      console.error("Error liking the thought:", error);
+    }
   };
 
   return (
     <LikeContainer>
-      <LikeButton onClick={handleLike} liked={liked}>
+      <LikeButton onClick={handleLike} $liked={liked}>
         ❤️
       </LikeButton>
       <LikeCount>x {likeCount}</LikeCount>

@@ -68,32 +68,11 @@ const Button = styled.button`
   }
 `;
 
-const CircleWrapper = styled.div`
-  position: relative;
-  width: 50px;
-  height: 50px;
-  margin: 10px 0;
-`;
-
-const ProgressCircle = styled.svg`
-  transform: rotate(0deg);
-`;
-
-const CircleText = styled.text`
-  font-size: 12px;
-  fill: ${({ color }) => color};
-  text-anchor: middle;
-  dominant-baseline: central;
-`;
-
 export const Post = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
 
   const maxLength = 140;
-  const charCount = inputValue.length;
-  const charsLeft = maxLength - charCount;
-  const counterColor = charsLeft < 0 ? "#E63946" : "#333";
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -101,53 +80,39 @@ export const Post = ({ onSubmit }) => {
     setError(value.length > maxLength ? "Your message is too long" : "");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (inputValue.trim() && inputValue.length <= maxLength) {
-      const newThought = {
-        text: inputValue,
-        timestamp: new Date().toISOString(),
-      };
-      onSubmit(newThought);
-      setInputValue("");
+    if (
+      inputValue.trim() &&
+      inputValue.length >= 1 &&
+      inputValue.length <= maxLength
+    ) {
+      try {
+        const response = await fetch(
+          "https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: inputValue }),
+          }
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          setError(errorData.message || "Failed to post your thought.");
+          return;
+        }
+
+        const newThought = await response.json();
+        onSubmit(newThought); // Pass the new thought to the parent component
+        setInputValue("");
+        setError("");
+      } catch (err) {
+        setError("Something went wrong. Please try again.", err);
+      }
+    } else {
+      setError("Message must be under 140 characters.");
     }
-  };
-
-  // Moved this INSIDE the component scope properly
-  const renderProgressCircle = () => {
-    const radius = 20;
-    const circumference = 2 * Math.PI * radius;
-    const progress = Math.min(charCount / maxLength, 1);
-    const strokeDashoffset = circumference * (1 - progress);
-    const strokeColor = charsLeft < 0 ? "#e63946" : "#7a7b7b";
-
-    return (
-      <CircleWrapper>
-        <ProgressCircle width="50" height="50">
-          <circle
-            cx="25"
-            cy="25"
-            r={radius}
-            stroke="#e6e6e6"
-            strokeWidth="4"
-            fill="none"
-          />
-          <circle
-            cx="25"
-            cy="25"
-            r={radius}
-            stroke={strokeColor}
-            strokeWidth="4"
-            fill="none"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-          />
-          <CircleText x="25" y="25" color={strokeColor}>
-            {charCount}
-          </CircleText>
-        </ProgressCircle>
-      </CircleWrapper>
-    );
   };
 
   return (
@@ -159,17 +124,13 @@ export const Post = ({ onSubmit }) => {
           onChange={handleInputChange}
           placeholder="Type your happy thought here"
         />
-
         <SubmitButtonContainer>
           <Button type="submit" disabled={inputValue.length === 0}>
             ❤️ Send Happy Thought ❤️
           </Button>
-          <div>
-            {renderProgressCircle()}
-            {error && (
-              <p style={{ color: "#e63946", fontSize: "11px" }}>{error}</p>
-            )}
-          </div>
+          {error && (
+            <p style={{ color: "#e63946", fontSize: "11px" }}>{error}</p>
+          )}
         </SubmitButtonContainer>
       </form>
     </PostContainer>
