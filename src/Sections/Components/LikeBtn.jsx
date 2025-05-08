@@ -7,6 +7,7 @@ const LikeButton = styled.button`
   width: 50px;
   height: 50px;
   border: none;
+  padding: 10px;
   margin-top: 10px;
   border-radius: 50%;
   align-self: flex-start;
