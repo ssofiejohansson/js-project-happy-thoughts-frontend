@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Post } from "./Post";
 import { View } from "./View";
 import styled from "styled-components";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Container = styled.div`
   display: flex;
@@ -50,6 +51,11 @@ export const Thoughts = () => {
 
   return (
     <Container>
+      <DotLottieReact
+        src="https://lottie.host/5a7cb486-522b-4467-b656-356bea2585ff/MH7Oyw6zWd.lottie"
+        loop
+        autoplay
+      />
       <Heading>Welcome to Happy Thoughts ❤️</Heading>
       <SubHeading>
         Trying to make the world a better place,{" "}
