@@ -9,12 +9,13 @@ const ViewContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   background-color: white;
-  width: 80vw;
+  width: 90vw;
   box-sizing: border-box;
   outline: 2px solid #000;
   padding: 20px;
   box-shadow: 6px 6px 0px 0px black;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+
 
   @media (min-width: 768px) {
     max-width: 600px;
