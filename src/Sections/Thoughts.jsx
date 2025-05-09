@@ -55,7 +55,7 @@ export const Thoughts = () => {
         src="https://lottie.host/5a7cb486-522b-4467-b656-356bea2585ff/MH7Oyw6zWd.lottie"
         loop
         autoplay
-        style={{ maxWidth: "750px" }}
+        style={{ maxWidth: "500px" }}
       />
       <Heading>Welcome to Happy Thoughts ❤️</Heading>
       <SubHeading>
