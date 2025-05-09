@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { TimeAgo } from "./Components/TimeAgo";
 import { LikeBtn } from "./Components/LikeBtn";
@@ -15,15 +14,14 @@ const ViewContainer = styled.div`
   padding: 20px;
   box-shadow: 6px 6px 0px 0px black;
   margin-bottom: 10px;
-
+  transition: transform 0.2s ease;
 
   @media (min-width: 768px) {
-    max-width: 600px;
+    max-width: 700px;
   }
 `;
 
 const TextField = styled.div`
-  background-color: white;
   font-family: monospace;
   font-weight: 500;
   font-size: 16px;
@@ -45,7 +43,6 @@ export const View = ({ thoughts, onLike }) => {
         thoughts.map((thought) => (
           <ViewContainer key={thought._id}>
             <TextField>{thought.message}</TextField>
-
             <ActionsWrapper>
               <LikeBtn
                 thoughtId={thought._id}

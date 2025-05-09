@@ -15,7 +15,7 @@ const PostContainer = styled.div`
   box-sizing: border-box;
 
   @media (min-width: 768px) {
-    max-width: 600px;
+    max-width: 700px;
   }
 `;
 
@@ -67,6 +67,10 @@ const InputArea = styled.textarea`
     border-color: #7a7b7b;
     box-shadow: 0 0 5px #7a7b7b;
   }
+     &::placeholder {
+    font-size: 13px;
+    
+  }
 `;
 
 const SubmitButtonContainer = styled.div`
@@ -82,33 +86,43 @@ const Button = styled.button`
   color: #000;
   font-weight: 600;
   border: none;
-  padding: 6px 12px;
-
+  padding: 7px 14px;
   border-radius: 50px;
   cursor: pointer;
   font-size: 13px;
   font-family: Roboto, sans-serif;
   letter-spacing: 0.2px;
-  margin: 10px;
+  margin: 15px 5px 5px;
+  transition: transform 0.3s ease;
 
   &:hover {
     transform: scale(1.1);
   }
+  &:disabled {
+    background-color:rgba(253, 175, 175, 0.47);
+    cursor: default;
+  
+  &:hover {
+    transform: scale(1);
+  }
 `;
 
-const StarAnimation = keyframes`
-  0%, 100% {
+const PostAnimation = keyframes`
+  0% {
+    transform: scale(1);
     opacity: 0;
   }
-  25%, 75% {
-    opacity: 0.5;
-  }
-     50% {
+    50% {
+    transform: scale(1.5);
     opacity: 1;
+    }
+  100% {
+    transform: scale(2); 
+    opacity: 0;
   }
 `;
 
-const StarContainer = styled.div`
+const PostAnimationContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -116,15 +130,15 @@ const StarContainer = styled.div`
   pointer-events: none;
 `;
 
-const Star = styled.span`
-  font-size: 54px;
-  animation: ${StarAnimation} 3s ease-out forwards;
+const Animation = styled.span`
+  font-size: 55px;
+  animation: ${PostAnimation} 3s ease-out forwards;
 `;
 
 export const Post = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
-  const [showStars, setShowStars] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
 
   const maxLength = 140;
   const charCount = inputValue.length;
@@ -165,14 +179,14 @@ export const Post = ({ onSubmit }) => {
         setInputValue("");
         setError("");
 
-        // When submitting - show star for 3 seconds
-        setShowStars(true);
-        setTimeout(() => setShowStars(false), 3000);
+        // When submitting - show animation for 3 seconds
+        setShowAnimation(true);
+        setTimeout(() => setShowAnimation(false), 3000);
       } catch (err) {
         setError("Something went wrong. Please try again.", err);
       }
     } else {
-      setError("Your thought must be less than 140 characters.");
+      setError("Your thought must be between 5 and 140 characters.");
     }
   };
 
@@ -220,12 +234,12 @@ export const Post = ({ onSubmit }) => {
           <InputArea
             value={inputValue}
             onChange={handleInputChange}
-            placeholder="Type your happy thought here"
+            placeholder="Your thought must be at least 5 characters"
           />
           {renderProgressCircle()}
         </InputWrapper>
         <SubmitButtonContainer>
-          <Button type="submit" disabled={inputValue.length === 0}>
+          <Button type="submit" disabled={inputValue.length < 5}>
             ❤️ Send Happy Thought ❤️
           </Button>
           {error && (
@@ -233,10 +247,10 @@ export const Post = ({ onSubmit }) => {
           )}
         </SubmitButtonContainer>
       </form>
-      {showStars && (
-        <StarContainer>
-          <Star>✨</Star>
-        </StarContainer>
+      {showAnimation && (
+        <PostAnimationContainer>
+          <Animation>❤️</Animation>
+        </PostAnimationContainer>
       )}
     </PostContainer>
   );

@@ -12,10 +12,19 @@ const LikeButton = styled.button`
   border-radius: 50%;
   align-self: flex-start;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  &:hover {
-    transform: scale(1.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover span {
+    transform: scale(1.2);
+    transform-origin: center;
   }
+`;
+
+const Heart = styled.span`
+  display: inline-block;
+  transform-origin: center; 
 `;
 
 const LikeCount = styled.span`
@@ -64,7 +73,7 @@ export const LikeBtn = ({ thoughtId, hearts }) => {
   return (
     <LikeContainer>
       <LikeButton onClick={handleLike} $liked={liked}>
-        ❤️
+        <Heart>❤️</Heart>
       </LikeButton>
       <LikeCount>x {likeCount}</LikeCount>
     </LikeContainer>

@@ -8,7 +8,7 @@ const Text = styled.span`
 
 export const TimeAgo = ({ timestamp }) => {
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
-  if (isNaN(date)) return <Text>Invalid date</Text>; // Rendered as a span element
+  if (isNaN(date)) return <Text>Invalid date</Text>;
 
   const now = new Date();
   const seconds = Math.floor((now - date) / 1000);
