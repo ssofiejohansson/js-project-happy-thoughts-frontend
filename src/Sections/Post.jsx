@@ -118,7 +118,7 @@ const StarContainer = styled.div`
 
 const Star = styled.span`
   font-size: 54px;
-  animation: ${StarAnimation} 3s ease-out forwards ;
+  animation: ${StarAnimation} 3s ease-out forwards;
 `;
 
 export const Post = ({ onSubmit }) => {
