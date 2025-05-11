@@ -123,15 +123,16 @@ const PostAnimation = keyframes`
 `;
 
 const PostAnimationContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none;
+  pointer-events: none; 
+  z-index: 1000;
 `;
 
 const Animation = styled.span`
-  font-size: 55px;
+  font-size: 45px;
   animation: ${PostAnimation} 3s ease-out forwards;
 `;
 
