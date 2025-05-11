@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Post } from "./Post";
 import { View } from "./View";
-import styled from "styled-components";
+import { styled, keyframes } from "styled-components";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Container = styled.div`
@@ -33,14 +33,37 @@ const RedText = styled.span`
   color: #e63946;
 `;
 
+const Rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const Hourglass = styled.div`
+  font-size: 45px;
+  animation: ${Rotate} 1.5s linear infinite;
+`;
+
 export const Thoughts = () => {
   const [happyThoughts, setHappyThoughts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch("https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts")
       .then((res) => res.json())
-      .then((data) => setHappyThoughts(data))
-      .catch((err) => console.error("Failed to fetch thoughts:", err));
+      .then((data) => {
+        setHappyThoughts(data)
+        setLoading(false);
+      })
+
+      .catch((err) => {
+        console.error("Failed to fetch thoughts:", err)
+        setLoading(false);
+      });
   }, []);
 
   const handleFormSubmit = (newThought) => {
@@ -61,7 +84,13 @@ export const Thoughts = () => {
         <RedText>one thought at a time.</RedText>
       </SubHeading>
       <Post onSubmit={handleFormSubmit} />
-      <View thoughts={happyThoughts} />
+      {loading ? (
+        <Hourglass>⏳</Hourglass>
+      ) : (
+        <>
+          <View thoughts={happyThoughts} />
+        </>
+      )}
     </Container>
   );
 };
