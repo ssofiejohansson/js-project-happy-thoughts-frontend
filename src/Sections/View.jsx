@@ -8,17 +8,15 @@ const ViewContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   background-color: white;
-  width: 90vw;
+  width: 100%;
+  max-width: 700px;
   box-sizing: border-box;
   outline: 2px solid #000;
   padding: 20px;
   box-shadow: 6px 6px 0px 0px black;
   margin-bottom: 10px;
   transition: transform 0.2s ease;
-
-  @media (min-width: 768px) {
-    max-width: 700px;
-  }
+  overflow-wrap: break-word; 
 `;
 
 const TextField = styled.div`

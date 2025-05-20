@@ -10,13 +10,10 @@ const PostContainer = styled.div`
   background-color: #f2f0f0;
   outline: 2px solid #000;
   box-shadow: 8px 8px 0px #000;
-  width: 90vw;
+  width: 100%;
+  max-width: 700px;
   margin-bottom: 20px;
   box-sizing: border-box;
-
-  @media (min-width: 768px) {
-    max-width: 700px;
-  }
 `;
 
 const Title = styled.h2`
