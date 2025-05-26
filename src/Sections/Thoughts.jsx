@@ -53,7 +53,7 @@ export const Thoughts = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts")
+    fetch("https://happy-thoughts-api-4ful.onrender.com/thoughts")
       .then((res) => res.json())
       .then((data) => {
         setHappyThoughts(data)
