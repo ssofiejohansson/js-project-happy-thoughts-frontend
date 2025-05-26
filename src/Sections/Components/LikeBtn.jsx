@@ -49,7 +49,7 @@ export const LikeBtn = ({ thoughtId, hearts }) => {
 
     try {
       const response = await fetch(
-        `https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts/${thoughtId}/like`,
+        `https://happy-thoughts-api-4ful.onrender.com/thoughts/${thoughtId}/like`,
         {
           method: "POST",
           headers: {
