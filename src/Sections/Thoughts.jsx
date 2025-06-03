@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Post } from "./Post";
-import { View } from "./View";
-import { styled, keyframes } from "styled-components";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import React, { useEffect, useState } from 'react';
+import { Post } from './Post';
+import { View } from './View';
+import { styled, keyframes } from 'styled-components';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Container = styled.div`
   display: flex;
@@ -53,15 +53,15 @@ export const Thoughts = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://happy-thoughts-api-4ful.onrender.com/thoughts")
+    fetch('https://happy-thoughts-api-4ful.onrender.com/thoughts')
       .then((res) => res.json())
       .then((data) => {
-        setHappyThoughts(data)
+        setHappyThoughts(data);
         setLoading(false);
       })
 
       .catch((err) => {
-        console.error("Failed to fetch thoughts:", err)
+        console.error('Failed to fetch thoughts:', err);
         setLoading(false);
       });
   }, []);
@@ -73,14 +73,14 @@ export const Thoughts = () => {
   return (
     <Container>
       <DotLottieReact
-        src="https://lottie.host/5a7cb486-522b-4467-b656-356bea2585ff/MH7Oyw6zWd.lottie"
+        src='https://lottie.host/5a7cb486-522b-4467-b656-356bea2585ff/MH7Oyw6zWd.lottie'
         loop
         autoplay
-        style={{ maxWidth: "350px" }}
+        style={{ maxWidth: '350px' }}
       />
       <Heading>Welcome to Happy Thoughts ❤️</Heading>
       <SubHeading>
-        Trying to make the world a better place,{" "}
+        Trying to make the world a better place,{' '}
         <RedText>one thought at a time.</RedText>
       </SubHeading>
       <Post onSubmit={handleFormSubmit} />
