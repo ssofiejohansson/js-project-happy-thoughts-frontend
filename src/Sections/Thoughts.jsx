@@ -53,7 +53,7 @@ export const Thoughts = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('https://happy-thoughts-api-4ful.onrender.com/thoughts')
+    fetch('http://localhost:8080/thoughts')
       .then((res) => res.json())
       .then((data) => {
         setHappyThoughts(data);
@@ -68,6 +68,10 @@ export const Thoughts = () => {
 
   const handleFormSubmit = (newThought) => {
     setHappyThoughts((prevThoughts) => [newThought, ...prevThoughts]);
+  };
+
+  const handleDeleteThought = (deletedId) => {
+    setHappyThoughts((prev) => prev.filter((t) => t._id !== deletedId));
   };
 
   return (
@@ -87,9 +91,10 @@ export const Thoughts = () => {
       {loading ? (
         <Hourglass>⏳</Hourglass>
       ) : (
-        <>
-          <View thoughts={happyThoughts} />
-        </>
+        <View
+          thoughts={happyThoughts}
+          handleDeleteThought={handleDeleteThought}
+        />
       )}
     </Container>
   );

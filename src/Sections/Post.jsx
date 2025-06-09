@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const PostContainer = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const Title = styled.h2`
 const InputWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   width: 100%;
   position: relative;
 `;
@@ -50,7 +50,6 @@ const CircleText = styled.text`
   dominant-baseline: central;
 `;
 
-
 const InputArea = styled.textarea`
   width: 90%;
   border: 2px solid #7a7b7b;
@@ -64,9 +63,8 @@ const InputArea = styled.textarea`
     border-color: #7a7b7b;
     box-shadow: 0 0 5px #7a7b7b;
   }
-     &::placeholder {
+  &::placeholder {
     font-size: 13px;
-    
   }
 `;
 
@@ -96,9 +94,9 @@ const Button = styled.button`
     transform: scale(1.1);
   }
   &:disabled {
-    background-color:rgba(253, 175, 175, 0.47);
+    background-color: rgba(253, 175, 175, 0.47);
     cursor: default;
-  
+  }
   &:hover {
     transform: scale(1);
   }
@@ -124,7 +122,7 @@ const PostAnimationContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none; 
+  pointer-events: none;
   z-index: 1000;
 `;
 
@@ -134,19 +132,18 @@ const Animation = styled.span`
 `;
 
 export const Post = ({ onSubmit }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState("");
+  const [inputValue, setInputValue] = useState('');
+  const [error, setError] = useState('');
   const [showAnimation, setShowAnimation] = useState(false);
 
   const maxLength = 140;
   const charCount = inputValue.length;
   const charsLeft = maxLength - charCount;
 
-
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInputValue(value);
-    setError(value.length > maxLength ? "Your thought is too long." : "");
+    setError(value.length > maxLength ? 'Your thought is too long.' : '');
   };
 
   const handleSubmit = async (event) => {
@@ -157,34 +154,31 @@ export const Post = ({ onSubmit }) => {
       inputValue.length <= maxLength
     ) {
       try {
-        const response = await fetch(
-          "https://happy-thoughts-api-4ful.onrender.com/thoughts",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: inputValue }),
-          }
-        );
+        const response = await fetch('http://localhost:8080/thoughts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: inputValue }),
+        });
 
         if (!response.ok) {
           const errorData = await response.json();
-          setError(errorData.message || "Failed to post your thought.");
+          setError(errorData.message || 'Failed to post your thought.');
           return;
         }
 
         const newThought = await response.json();
         onSubmit(newThought);
-        setInputValue("");
-        setError("");
+        setInputValue('');
+        setError('');
 
         // When submitting - show animation for 3 seconds
         setShowAnimation(true);
         setTimeout(() => setShowAnimation(false), 3000);
       } catch (err) {
-        setError("Something went wrong. Please try again.", err);
+        setError('Something went wrong. Please try again.', err);
       }
     } else {
-      setError("Your thought must be between 5 and 140 characters.");
+      setError('Your thought must be between 5 and 140 characters.');
     }
   };
 
@@ -193,30 +187,30 @@ export const Post = ({ onSubmit }) => {
     const circumference = 2 * Math.PI * radius;
     const progress = Math.min(charCount / maxLength, 1);
     const strokeDashoffset = circumference * (1 - progress);
-    const strokeColor = charsLeft < 0 ? "#e63946" : "#7a7b7b";
+    const strokeColor = charsLeft < 0 ? '#e63946' : '#7a7b7b';
 
     return (
       <CircleWrapper>
-        <ProgressCircle width="50" height="50">
+        <ProgressCircle width='50' height='50'>
           <circle
-            cx="25"
-            cy="25"
+            cx='25'
+            cy='25'
             r={radius}
-            stroke="#e6e6e6"
-            strokeWidth="4"
-            fill="none"
+            stroke='#e6e6e6'
+            strokeWidth='4'
+            fill='none'
           />
           <circle
-            cx="25"
-            cy="25"
+            cx='25'
+            cy='25'
             r={radius}
             stroke={strokeColor}
-            strokeWidth="4"
-            fill="none"
+            strokeWidth='4'
+            fill='none'
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
           />
-          <CircleText x="25" y="25" color={strokeColor}>
+          <CircleText x='25' y='25' color={strokeColor}>
             {charCount}
           </CircleText>
         </ProgressCircle>
@@ -232,16 +226,16 @@ export const Post = ({ onSubmit }) => {
           <InputArea
             value={inputValue}
             onChange={handleInputChange}
-            placeholder="Your thought must be at least 5 characters"
+            placeholder='Your thought must be at least 5 characters'
           />
           {renderProgressCircle()}
         </InputWrapper>
         <SubmitButtonContainer>
-          <Button type="submit" disabled={inputValue.length < 5}>
+          <Button type='submit' disabled={inputValue.length < 5}>
             ❤️ Send Happy Thought ❤️
           </Button>
           {error && (
-            <p style={{ color: "#e63946", fontSize: "11px" }}>{error}</p>
+            <p style={{ color: '#e63946', fontSize: '11px' }}>{error}</p>
           )}
         </SubmitButtonContainer>
       </form>

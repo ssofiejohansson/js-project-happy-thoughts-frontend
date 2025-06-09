@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const LikeButton = styled.button`
   font-size: 24px;
-  background-color: ${(props) => (props.$liked ? "#fdafaf" : "#ebebeb")};
+  background-color: ${(props) => (props.$liked ? '#fdafaf' : '#ebebeb')};
   width: 50px;
   height: 50px;
   border: none;
@@ -24,7 +24,7 @@ const LikeButton = styled.button`
 
 const Heart = styled.span`
   display: inline-block;
-  transform-origin: center; 
+  transform-origin: center;
 `;
 
 const LikeCount = styled.span`
@@ -45,28 +45,28 @@ export const LikeBtn = ({ thoughtId, hearts }) => {
   const [liked, setLiked] = useState(false);
 
   const handleLike = async () => {
-    console.log("Sending like to:", thoughtId);
+    console.log('Sending like to:', thoughtId);
 
     try {
       const response = await fetch(
         `https://happy-thoughts-api-4ful.onrender.com/thoughts/${thoughtId}/like`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
       );
 
       if (response.ok) {
-        console.log("Thought liked successfully!");
+        console.log('Thought liked successfully!');
         setLikeCount(likeCount + 1);
         setLiked(true);
       } else {
-        console.error("Failed to like the thought");
+        console.error('Failed to like the thought');
       }
     } catch (error) {
-      console.error("Error liking the thought:", error);
+      console.error('Error liking the thought:', error);
     }
   };
 
