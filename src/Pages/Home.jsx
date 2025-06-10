@@ -1,5 +1,4 @@
-import { PostContainer, Title, InputWrapper, InputArea, SubmitButtonContainer, Button } from "../Sections/Post"
-import { Container } from "../Sections/Thoughts"
+import { Title, Button } from "../Sections/Post"
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 export const Home = () => {
@@ -7,7 +6,7 @@ export const Home = () => {
     <>
       <p>Home page</p>
       <a href="/thoughts">See all thoughts</a>
-      <Container>
+      <div>
         <DotLottieReact
           src='https://lottie.host/5a7cb486-522b-4467-b656-356bea2585ff/MH7Oyw6zWd.lottie'
           loop
@@ -16,16 +15,16 @@ export const Home = () => {
         />
         <h1>Welcome to Happy Thoughts ❤️</h1>
         <Title> Log in</Title>
-        <PostContainer>
-          <InputWrapper>
+        <div>
+          <div>
             Username:
             <input></input>
             Password:
             <input></input>
-          </InputWrapper>
-          <SubmitButtonContainer><Button>Log in</Button></SubmitButtonContainer>
-        </PostContainer>
-      </Container >
+          </div>
+          <div><Button>Log in</Button></div>
+        </div>
+      </div >
     </>
   )
 }
