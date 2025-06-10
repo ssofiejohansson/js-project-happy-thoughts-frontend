@@ -4,7 +4,7 @@ import { View } from './View';
 import { styled, keyframes } from 'styled-components';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +13,7 @@ const Container = styled.div`
   gap: 30px;
 `;
 
-const BaseHeading = styled.h1`
+export const BaseHeading = styled.h1`
   color: rgb(42, 42, 42);
   text-align: center;
   font-weight: 500;
@@ -21,11 +21,11 @@ const BaseHeading = styled.h1`
   letter-spacing: 0.2px;
 `;
 
-const Heading = styled(BaseHeading)`
+export const Heading = styled(BaseHeading)`
   font-size: 22px;
 `;
 
-const SubHeading = styled(BaseHeading)`
+export const SubHeading = styled(BaseHeading)`
   font-size: 15px;
 `;
 

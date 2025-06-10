@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const PostContainer = styled.div`
+export const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -16,7 +16,7 @@ const PostContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const Title = styled.h2`
+export const Title = styled.h2`
   font-size: 16px;
   color: #000;
   font-weight: 500;
@@ -24,10 +24,11 @@ const Title = styled.h2`
   letter-spacing: 0.2px;
 `;
 
-const InputWrapper = styled.div`
+export const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
   position: relative;
 `;
@@ -50,7 +51,7 @@ const CircleText = styled.text`
   dominant-baseline: central;
 `;
 
-const InputArea = styled.textarea`
+export const InputArea = styled.textarea`
   width: 90%;
   border: 2px solid #7a7b7b;
   padding: 10px;
@@ -68,7 +69,7 @@ const InputArea = styled.textarea`
   }
 `;
 
-const SubmitButtonContainer = styled.div`
+export const SubmitButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -76,7 +77,7 @@ const SubmitButtonContainer = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   background-color: #fdafaf;
   color: #000;
   font-weight: 600;
