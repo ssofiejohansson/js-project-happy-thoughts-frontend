@@ -20,8 +20,25 @@ export const DeleteBtn = ({ thoughtId, onDelete }) => {
   };
 
   return (
-    <button onClick={handleDelete} className='delete-button'>
-      🗑️ Delete
-    </button>
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <button
+        onClick={handleDelete}
+        style={{
+          position: 'relative',
+          top: '10px',
+          right: '10px',
+          background: 'transparent',
+          border: 'none',
+          fontSize: '1.3rem',
+          cursor: 'pointer',
+          color: '#f357a8',
+          fontWeight: 'bold',
+          lineHeight: 1,
+        }}
+        aria-label='Delete'
+      >
+        ×
+      </button>
+    </div>
   );
 };
