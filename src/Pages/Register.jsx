@@ -8,9 +8,9 @@ export const Register = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleRegister = async () => {
+  const handleRegister = async (username, password) => {
     try {
-      const response = await fetch('http://localhost:8080/register', {
+      const response = await fetch('http://localhost:8081/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -47,7 +47,6 @@ export const Register = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
-
         <label>
           Password:
           <input
@@ -56,8 +55,9 @@ export const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-
-        <Button onClick={handleRegister}>Register</Button>
+        <Button onClick={() => handleRegister(username, password)}>
+          Register
+        </Button>
         {message && <p>{message}</p>}
       </div>
     </Container>
