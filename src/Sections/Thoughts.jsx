@@ -53,7 +53,7 @@ export const Thoughts = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:8080/thoughts')
+    fetch('http://localhost:8081/thoughts')
       .then((res) => res.json())
       .then((data) => {
         setHappyThoughts(data);
