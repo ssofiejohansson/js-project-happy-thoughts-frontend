@@ -28,7 +28,7 @@ const NavItem = styled.li`
 
 const StyledLink = styled(Link)`
   color: #222;
-  text-decoration: none;
+  text-decoration: none; 
   padding: 6px 16px;
   border-radius: 6px;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
