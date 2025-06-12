@@ -2,35 +2,35 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 export const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  padding: 20px;
-  background-color: #f2f0f0;
-  outline: 2px solid #000;
-  box-shadow: 8px 8px 0px #000;
+  background-color: #f48fb1;
+  border: 6px solid #f4511e;
+  padding: 32px;
   width: 100%;
   max-width: 700px;
-  margin-bottom: 20px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-radius: 24px;
 `;
 
-export const Title = styled.h2`
-  font-size: 16px;
-  color: #000;
-  font-weight: 500;
-  font-family: Roboto, sans-serif;
-  letter-spacing: 0.2px;
+export const Title = styled.h1`
+  letter-spacing: 1px;
+  @media (max-width: 767px) {
+    text-align: center;
+    width: 100%;
+  }
 `;
 
 export const InputWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  align-items: flex-start; // changed from center to flex-start for better alignment
+  justify-content: flex-start; // changed from space-between to flex-start
+  flex-wrap: nowrap; // changed from wrap to nowrap
   width: 100%;
   position: relative;
+  gap: 12px; // add some space between textarea and circle
 `;
 
 const CircleWrapper = styled.div`
@@ -44,19 +44,23 @@ const ProgressCircle = styled.svg`
   transform: rotate(0deg);
 `;
 
-const CircleText = styled.text`
-  font-size: 12px;
-  fill: ${({ color }) => color};
-  text-anchor: middle;
-  dominant-baseline: central;
-`;
+//got error msg and was told to remove this
+// const CircleText = styled.text`
+//   font-size: 12px;
+//   fill: ${({ color }) => color};
+//   text-anchor: middle;
+//   dominant-baseline: middle;
+// `;
 
 export const InputArea = styled.textarea`
   width: 90%;
+  max-width: 90%;
+  min-width: 0;
   border: 2px solid #7a7b7b;
   padding: 10px;
   font-size: 16px;
   resize: none;
+  border-radius: 8px;
 
   &:focus {
     outline: none;
@@ -133,32 +137,33 @@ const Animation = styled.span`
 `;
 
 export const Post = ({ onSubmit }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [showAnimation, setShowAnimation] = useState(false);
 
   const maxLength = 140;
-  const charCount = inputValue.length;
+  const charCount = message.length;
   const charsLeft = maxLength - charCount;
 
   const handleInputChange = (event) => {
     const value = event.target.value;
-    setInputValue(value);
+    setMessage(value);
     setError(value.length > maxLength ? 'Your thought is too long.' : '');
   };
 
+  const yourToken = localStorage.getItem('accessToken');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (
-      inputValue.trim() &&
-      inputValue.length >= 1 &&
-      inputValue.length <= maxLength
-    ) {
+    if (message.trim() && message.length >= 1 && message.length <= maxLength) {
       try {
         const response = await fetch('http://localhost:8081/thoughts', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: inputValue }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+          body: JSON.stringify({ message }),
         });
 
         if (!response.ok) {
@@ -169,7 +174,7 @@ export const Post = ({ onSubmit }) => {
 
         const newThought = await response.json();
         onSubmit(newThought);
-        setInputValue('');
+        setMessage('');
         setError('');
 
         // When submitting - show animation for 3 seconds
@@ -211,9 +216,16 @@ export const Post = ({ onSubmit }) => {
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
           />
-          <CircleText x='25' y='25' color={strokeColor}>
+          <text
+            x='25'
+            y='25'
+            fill={strokeColor}
+            fontSize='12'
+            textAnchor='middle'
+            dominantBaseline='middle'
+          >
             {charCount}
-          </CircleText>
+          </text>
         </ProgressCircle>
       </CircleWrapper>
     );
@@ -221,18 +233,26 @@ export const Post = ({ onSubmit }) => {
 
   return (
     <PostContainer>
-      <Title>What's making you happy right now?</Title>
+      <h2>What's making you happy right now?</h2>
       <form onSubmit={handleSubmit}>
         <InputWrapper>
           <InputArea
-            value={inputValue}
+            value={message}
             onChange={handleInputChange}
             placeholder='Your thought must be at least 5 characters'
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (message.length >= 5 && message.length <= maxLength) {
+                  handleSubmit(e);
+                }
+              }
+            }}
           />
           {renderProgressCircle()}
         </InputWrapper>
         <SubmitButtonContainer>
-          <Button type='submit' disabled={inputValue.length < 5}>
+          <Button type='submit' disabled={message.length < 5}>
             ❤️ Send Happy Thought ❤️
           </Button>
           {error && (

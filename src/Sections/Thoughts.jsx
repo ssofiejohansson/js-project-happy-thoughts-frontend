@@ -1,36 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Post } from './Post';
+import { useEffect, useState } from 'react';
+import { Post, Title } from './Post';
 import { View } from './View';
 import { styled, keyframes } from 'styled-components';
+import { useLocation } from 'react-router-dom';
+import { Bubble } from '../Sections/Components/Bubble';
+import { DotLottieWrapper } from '../Pages/Home';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { Button } from '../Sections/Components/Button';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 15px;
-  gap: 30px;
+  gap: 15px;
 `;
 
-export const BaseHeading = styled.h1`
-  color: rgb(42, 42, 42);
-  text-align: center;
-  font-weight: 500;
-  font-family: Monospace, monospace;
-  letter-spacing: 0.2px;
-`;
-
-export const Heading = styled(BaseHeading)`
+export const SubHeading = styled.h2`
   font-size: 22px;
-`;
-
-export const SubHeading = styled(BaseHeading)`
-  font-size: 15px;
-`;
-
-const RedText = styled.span`
-  color: #e63946;
+  font-weight: 400;
+  font-family: 'Roboto', Arial, sans-serif;
+  margin-bottom: 20px;
 `;
 
 const Rotate = keyframes`
@@ -50,6 +41,9 @@ const Hourglass = styled.div`
 export const Thoughts = () => {
   const [happyThoughts, setHappyThoughts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const accessToken = localStorage.getItem('accessToken');
+  const [showBubble, setShowBubble] = useState(true); // always true now
 
   useEffect(() => {
     setLoading(true);
@@ -59,15 +53,35 @@ export const Thoughts = () => {
         setHappyThoughts(data);
         setLoading(false);
       })
-
       .catch((err) => {
         console.error('Failed to fetch thoughts:', err);
         setLoading(false);
       });
   }, []);
 
+  useEffect(() => {
+    if (location.state?.loginMessage) {
+      setShowBubble(true);
+    }
+  }, [location.state]);
+
   const handleFormSubmit = (newThought) => {
-    setHappyThoughts((prevThoughts) => [newThought, ...prevThoughts]);
+    const accessToken = localStorage.getItem('accessToken');
+    fetch('http://localhost:8081/thoughts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ message: newThought.message }),
+    })
+      .then((res) => res.json())
+      .then((createdThought) => {
+        setHappyThoughts((prevThoughts) => [createdThought, ...prevThoughts]);
+      })
+      .catch((err) => {
+        console.error('Failed to post thought:', err);
+      });
   };
 
   const handleDeleteThought = (deletedId) => {
@@ -75,27 +89,50 @@ export const Thoughts = () => {
   };
 
   return (
-    <Container>
-      <DotLottieReact
-        src='https://lottie.host/5a7cb486-522b-4467-b656-356bea2585ff/MH7Oyw6zWd.lottie'
-        loop
-        autoplay
-        style={{ maxWidth: '350px' }}
-      />
-      <Heading>Welcome to Happy Thoughts ❤️</Heading>
-      <SubHeading>
-        Trying to make the world a better place,{' '}
-        <RedText>one thought at a time.</RedText>
-      </SubHeading>
-      <Post onSubmit={handleFormSubmit} />
-      {loading ? (
-        <Hourglass>⏳</Hourglass>
-      ) : (
-        <View
-          thoughts={happyThoughts}
-          handleDeleteThought={handleDeleteThought}
-        />
-      )}
-    </Container>
+    <>
+      <Container>
+        <Title>This is Happy Thoughts ❤️</Title>
+
+        {accessToken && (
+          <Button as={Link} to='/logout'>
+            Log out
+          </Button>
+        )}
+        {/* <p>
+          ← Go back to <Link to='/'>home</Link>.
+        </p> */}
+
+        <Post onSubmit={handleFormSubmit} />
+        {loading ? (
+          <Hourglass>⏳</Hourglass>
+        ) : (
+          <View
+            thoughts={happyThoughts}
+            handleDeleteThought={handleDeleteThought}
+          />
+        )}
+
+        <DotLottieWrapper>
+          {showBubble && (
+            <Bubble>
+              {location.state?.loginMessage ? (
+                location.state.loginMessage
+              ) : (
+                <>
+                  Please <Link to='/login'>login</Link> or{' '}
+                  <Link to='/register'>sign up</Link> to post a thought.
+                </>
+              )}
+            </Bubble>
+          )}
+          <DotLottieReact
+            src='https://lottie.host/5a7cb486-522b-4467-b656-356bea2585ff/MH7Oyw6zWd.lottie'
+            loop
+            autoplay
+            style={{ maxWidth: '200px' }}
+          />
+        </DotLottieWrapper>
+      </Container>
+    </>
   );
 };

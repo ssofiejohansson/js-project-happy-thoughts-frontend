@@ -4,35 +4,31 @@ import { LikeBtn } from './Components/LikeBtn';
 import { DeleteBtn } from './Components/DeleteBtn';
 
 const ViewContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  background-color: white;
+  background-color: #f48fb1;
+  border: 6px solid #f4511e;
+  padding: 32px;
   width: 100%;
   max-width: 700px;
   box-sizing: border-box;
-  outline: 2px solid #000;
-  padding: 20px;
-  box-shadow: 6px 6px 0px 0px black;
-  margin-bottom: 10px;
-  transition: transform 0.2s ease;
-  overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  border-radius: 24px;
 `;
 
 const TextField = styled.div`
-  font-family: monospace;
+  font-family: 'inter', sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
   margin-bottom: 10px;
 `;
 
 const ActionsWrapper = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  width: 100%;
 `;
 
 export const View = ({ thoughts, onLike, handleDeleteThought }) => {
@@ -51,8 +47,11 @@ export const View = ({ thoughts, onLike, handleDeleteThought }) => {
               <DeleteBtn
                 thoughtId={thought._id}
                 onDelete={handleDeleteThought}
-              />
+              />{' '}
+              <div>
+              <p>Posted by: {thought.username}</p>
               <TimeAgo timestamp={thought.createdAt} />
+              </div>
             </ActionsWrapper>
           </ViewContainer>
         ))}

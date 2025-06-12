@@ -1,7 +1,62 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 52px;
+  font-weight: 400;
+  font-family: 'Chewy', Arial, sans-serif;
+  color: #f4511e;
+  padding: 10px;
+}
+
+/* h2,
+h3 {
+  font-size: 22px;
+  font-weight: 400;
+  font-family: '', Arial, sans-serif;
+  margin-bottom: 20px;
+} */
+p {
+  font-family: '', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+a {
+  color: #f4511e;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #222;
+}
+
+@media (max-width: 767px) {
+  body {
+    min-height: 100dvh;
+    padding: 10px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+    padding: 5px;
+  }
 }
