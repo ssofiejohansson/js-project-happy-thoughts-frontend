@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const NavBar = styled.nav`
-  width: 100%;
-  margin: 0;
-  background: #f2f0f0;
-  border-bottom: 2px solid #000;
-  box-shadow: 0 4px 0 #000;
+  width: 700px;
+  margin: 30px auto 30px auto; /* 30px margin on top and bottom, centered */
+  background: #7b2ff2;
+
+  box-shadow: 0 4px 0 #6a1cc7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 0;
-  margin-bottom: 30px;
+  border-radius: 24px; /* all corners rounded */
 `;
 
 const NavList = styled.ul`
@@ -27,15 +30,16 @@ const NavItem = styled.li`
 `;
 
 const StyledLink = styled(Link)`
-  color: #222;
-  text-decoration: none; 
+  color: #fff; // white text
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
   padding: 6px 16px;
   border-radius: 6px;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  &:hover, &:focus {
-  
-    color: #e63946;
-
+  &:hover,
+  &:focus {
+    background: #f357a8;
+    color: #fff;
   }
 `;
 
@@ -44,16 +48,16 @@ export const Nav = () => {
     <NavBar>
       <NavList>
         <NavItem>
-          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to='/'>Home</StyledLink>
         </NavItem>
         <NavItem>
-          <StyledLink to="/login">Log in</StyledLink>
+          <StyledLink to='/login'>Login</StyledLink>
         </NavItem>
         <NavItem>
-          <StyledLink to="/register">Register</StyledLink>
+          <StyledLink to='/register'>Register</StyledLink>
         </NavItem>
         <NavItem>
-          <StyledLink to="/thoughts">See all thoughts</StyledLink>
+          <StyledLink to='/thoughts'>See all thoughts</StyledLink>
         </NavItem>
       </NavList>
     </NavBar>
