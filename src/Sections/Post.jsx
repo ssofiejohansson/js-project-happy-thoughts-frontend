@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+
 export const PostContainer = styled.div`
   background-color: #f48fb1;
   border: 6px solid #f4511e;
@@ -72,7 +74,7 @@ export const InputArea = styled.textarea`
     font-size: 12px;
   }
 
-    @media (max-width: 600px) {
+  @media (max-width: 600px) {
     width: 100%;
     max-width: 100%;
   }
@@ -162,7 +164,7 @@ export const Post = ({ onSubmit }) => {
     event.preventDefault();
     if (message.trim() && message.length >= 1 && message.length <= maxLength) {
       try {
-        const response = await fetch('http://localhost:8081/thoughts', {
+        const response = await fetch(`${API_URL}/thoughts`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

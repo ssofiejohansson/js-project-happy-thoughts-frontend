@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+
 const DeleteButton = styled.button`
   position: absolute;
   top: 2px;
@@ -26,15 +28,12 @@ export const DeleteBtn = ({ thoughtId, onDelete }) => {
   const handleDelete = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(
-        `http://localhost:8081/thoughts/${thoughtId}`,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/thoughts/${thoughtId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       if (!response.ok) {
         throw new Error('Failed to delete the thought');
       }

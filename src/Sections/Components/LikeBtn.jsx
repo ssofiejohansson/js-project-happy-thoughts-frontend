@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+
 const LikeButton = styled.button`
   font-size: 24px;
   background-color: none;
@@ -49,26 +51,27 @@ export const LikeBtn = ({ thoughtId, hearts, onLike }) => {
   }, [hearts]);
 
   useEffect(() => {
-    const likedThoughts = JSON.parse(localStorage.getItem('likedThoughts') || '[]');
+    const likedThoughts = JSON.parse(
+      localStorage.getItem('likedThoughts') || '[]'
+    );
     setLiked(likedThoughts.includes(thoughtId));
   }, [thoughtId]);
 
   const handleLike = async () => {
     if (liked) return;
 
-    const likedThoughts = JSON.parse(localStorage.getItem('likedThoughts') || '[]');
+    const likedThoughts = JSON.parse(
+      localStorage.getItem('likedThoughts') || '[]'
+    );
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(
-        `http://localhost:8081/thoughts/${thoughtId}/likes`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/thoughts/${thoughtId}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       if (response.ok) {
         const updatedThought = await response.json();
         setLikeCount(updatedThought.hearts);

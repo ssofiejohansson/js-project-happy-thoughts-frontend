@@ -9,6 +9,8 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Button } from '../Sections/Components/Button';
 import { Link } from 'react-router-dom';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,7 +48,7 @@ export const Thoughts = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:8081/thoughts')
+    fetch(`${API_URL}/thoughts`);
       .then((res) => res.json())
       .then((data) => {
         setHappyThoughts(data);
@@ -71,8 +73,6 @@ export const Thoughts = () => {
   const handleDeleteThought = (deletedId) => {
     setHappyThoughts((prev) => prev.filter((t) => t._id !== deletedId));
   };
-
-
 
   const currentUserId = localStorage.getItem('userId'); // Use userId instead of username
 
@@ -100,7 +100,6 @@ export const Thoughts = () => {
             thoughts={happyThoughts}
             setThoughts={setHappyThoughts}
             handleDeleteThought={handleDeleteThought}
-        
             currentUserId={currentUserId}
           />
         )}

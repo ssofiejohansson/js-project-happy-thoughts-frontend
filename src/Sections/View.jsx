@@ -9,6 +9,8 @@ import { EditThought } from './Components/EditBtn';
 import { Link } from 'react-router-dom';
 import { Button as StyledButton } from './Components/Button';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+
 export const ViewContainer = styled.div`
   background-color: #f48fb1;
   border: 6px solid #f4511e;
@@ -74,7 +76,7 @@ export const View = ({
   const saveEdit = async (_id, updatedText) => {
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://localhost:8081/thoughts/${_id}`, {
+      const response = await fetch(`${API_URL}/thoughts/${_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
