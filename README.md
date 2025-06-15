@@ -1,3 +1,3 @@
 # Happy Thoughts
 
-https://smilezone77.netlify.app/
+https://smilezone78.netlify.app/
