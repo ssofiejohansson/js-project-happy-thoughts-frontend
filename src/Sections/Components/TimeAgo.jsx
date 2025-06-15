@@ -1,10 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Text = styled.span`
-  color: #7a7b7b;
-    font-size: 15px;
-`
+  font-size: 14px;
+`;
 
 export const TimeAgo = ({ timestamp }) => {
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
@@ -28,11 +27,10 @@ export const TimeAgo = ({ timestamp }) => {
   for (const [unit, value] of Object.entries(intervals)) {
     const count = Math.floor(seconds / value);
     if (count >= 1) {
-      const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+      const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
       return <Text>{rtf.format(-count, unit)}</Text>;
     }
   }
 
   return <Text>just now</Text>;
 };
-

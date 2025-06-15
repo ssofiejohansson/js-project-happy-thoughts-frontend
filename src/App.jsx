@@ -6,6 +6,7 @@ import { Register } from './Pages/Register';
 // import { Nav } from './Sections/Components/Nav';
 import { Logout } from './Pages/Logout';
 import './index.css';
+import { MyLikes } from './Pages/MyLikes';
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/thoughts/likes' element={<MyLikes />} />
       </Routes>
     </BrowserRouter>
   );

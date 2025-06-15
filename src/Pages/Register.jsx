@@ -68,11 +68,11 @@ export const Register = () => {
             autoComplete='new-password'
           />
         </Label>
-        <SubmitButton type='submit'>Register</SubmitButton>
+        <SubmitButton type='submit'>Save</SubmitButton>
         {message && (
           <ErrorMsg
             style={{
-              color: message.includes('successful') ? '#2ecc40' : '#fff',
+              color: message.includes('successful') ? '#222' : '#fff',
             }}
           >
             {message}

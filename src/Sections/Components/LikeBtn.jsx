@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const LikeButton = styled.button`
   font-size: 24px;
-  background-color: ${(props) => (props.$liked ? '#fdafaf' : '#ebebeb')};
+  background-color: none;
   width: 50px;
   height: 50px;
   border: none;
@@ -29,7 +29,6 @@ const Heart = styled.span`
 
 const LikeCount = styled.span`
   font-size: 15px;
-  color: #7a7b7b;
   margin-left: 10px;
 `;
 
@@ -40,30 +39,45 @@ const LikeContainer = styled.div`
   margin-top: 10px;
 `;
 
-export const LikeBtn = ({ thoughtId, hearts }) => {
+// In LikeBtn.js
+export const LikeBtn = ({ thoughtId, hearts, onLike }) => {
   const [likeCount, setLikeCount] = useState(hearts);
   const [liked, setLiked] = useState(false);
 
-  const handleLike = async () => {
-    console.log('Sending like to:', thoughtId);
+  useEffect(() => {
+    setLikeCount(hearts);
+  }, [hearts]);
 
+  useEffect(() => {
+    const likedThoughts = JSON.parse(localStorage.getItem('likedThoughts') || '[]');
+    setLiked(likedThoughts.includes(thoughtId));
+  }, [thoughtId]);
+
+  const handleLike = async () => {
+    if (liked) return;
+
+    const likedThoughts = JSON.parse(localStorage.getItem('likedThoughts') || '[]');
     try {
+      const accessToken = localStorage.getItem('accessToken');
       const response = await fetch(
-        `https://happy-thoughts-api-4ful.onrender.com/thoughts/${thoughtId}/like`,
+        `http://localhost:8081/thoughts/${thoughtId}/likes`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-
       if (response.ok) {
-        console.log('Thought liked successfully!');
-        setLikeCount(likeCount + 1);
+        const updatedThought = await response.json();
+        setLikeCount(updatedThought.hearts);
         setLiked(true);
-      } else {
-        console.error('Failed to like the thought');
+        localStorage.setItem(
+          'likedThoughts',
+          JSON.stringify([...likedThoughts, thoughtId])
+        );
+        if (onLike) onLike(updatedThought); // Notify parent
       }
     } catch (error) {
       console.error('Error liking the thought:', error);

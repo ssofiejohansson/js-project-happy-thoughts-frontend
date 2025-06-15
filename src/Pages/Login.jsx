@@ -35,7 +35,7 @@ export const Login = () => {
         localStorage.setItem('userId', data.id);
         navigate('/thoughts', {
           state: {
-            loginMessage: `Hi, ${username} 🐮 Let's post some happy thoughts!`,
+            loginMessage: `Hey ${username} 🐮 Let's post some happy thoughts!`,
           },
         });
       } else {

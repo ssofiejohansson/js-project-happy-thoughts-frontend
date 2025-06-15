@@ -18,10 +18,9 @@ export const Container = styled.div`
 `;
 
 export const SubHeading = styled.h2`
-  font-size: 22px;
-  font-weight: 400;
-  font-family: 'Roboto', Arial, sans-serif;
-  margin-bottom: 20px;
+  font-size: clamp(1.2rem, 5vw, 20px);
+  margin-bottom: 0px;
+  padding: 10px;
 `;
 
 const Rotate = keyframes`
@@ -43,7 +42,7 @@ export const Thoughts = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const accessToken = localStorage.getItem('accessToken');
-  const [showBubble, setShowBubble] = useState(true); // always true now
+  const [showBubble, setShowBubble] = useState(true);
 
   useEffect(() => {
     setLoading(true);
@@ -66,27 +65,16 @@ export const Thoughts = () => {
   }, [location.state]);
 
   const handleFormSubmit = (newThought) => {
-    const accessToken = localStorage.getItem('accessToken');
-    fetch('http://localhost:8081/thoughts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ message: newThought.message }),
-    })
-      .then((res) => res.json())
-      .then((createdThought) => {
-        setHappyThoughts((prevThoughts) => [createdThought, ...prevThoughts]);
-      })
-      .catch((err) => {
-        console.error('Failed to post thought:', err);
-      });
+    setHappyThoughts((prevThoughts) => [newThought, ...prevThoughts]);
   };
 
   const handleDeleteThought = (deletedId) => {
     setHappyThoughts((prev) => prev.filter((t) => t._id !== deletedId));
   };
+
+
+
+  const currentUserId = localStorage.getItem('userId'); // Use userId instead of username
 
   return (
     <>
@@ -98,9 +86,11 @@ export const Thoughts = () => {
             Log out
           </Button>
         )}
-        {/* <p>
-          ← Go back to <Link to='/'>home</Link>.
-        </p> */}
+        {accessToken && (
+          <Button as={Link} to='/thoughts/likes'>
+            My Likes
+          </Button>
+        )}
 
         <Post onSubmit={handleFormSubmit} />
         {loading ? (
@@ -108,7 +98,10 @@ export const Thoughts = () => {
         ) : (
           <View
             thoughts={happyThoughts}
+            setThoughts={setHappyThoughts}
             handleDeleteThought={handleDeleteThought}
+        
+            currentUserId={currentUserId}
           />
         )}
 

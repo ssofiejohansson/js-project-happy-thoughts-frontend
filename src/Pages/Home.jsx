@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import { View } from '../Sections/View';
-import { Container, SubHeading } from '../Sections/Thoughts';
+import { Container } from '../Sections/Thoughts';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -48,22 +48,15 @@ export const Home = () => {
   return (
     <Container>
       <Title>✨ Welcome to Happy Thoughts ✨</Title>
-      <SubHeading>
-        Trying to make the world a better place, one thought at a time.
-      </SubHeading>
+      <p>Trying to make the world a better place, one thought at a time.</p>
       <ButtonContainer>
-      <Button as={Link} to='/login'>
-  Login
-</Button>
-<Button as={Link} to='/register'>
-  Sign up
-</Button>
+        <Button as={Link} to='/login'>
+          Login
+        </Button>
+        <Button as={Link} to='/register'>
+          Sign up
+        </Button>
       </ButtonContainer>
-      {/* {loading ? (
-        <div style={{ fontSize: 45 }}>⏳</div>
-      ) : (
-        <View thoughts={happyThoughts} />
-      )} */}
 
       <DotLottieWrapper>
         <Bubble>

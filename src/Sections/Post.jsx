@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 export const PostContainer = styled.div`
   background-color: #f48fb1;
   border: 6px solid #f4511e;
-  padding: 32px;
+  padding: 22px 18px;
   width: 100%;
   max-width: 700px;
   box-sizing: border-box;
@@ -16,6 +16,7 @@ export const PostContainer = styled.div`
 `;
 
 export const Title = styled.h1`
+  font-size: clamp(2rem, 6vw, 52px);
   letter-spacing: 1px;
   @media (max-width: 767px) {
     text-align: center;
@@ -25,12 +26,19 @@ export const Title = styled.h1`
 
 export const InputWrapper = styled.div`
   display: flex;
-  align-items: flex-start; // changed from center to flex-start for better alignment
-  justify-content: flex-start; // changed from space-between to flex-start
-  flex-wrap: nowrap; // changed from wrap to nowrap
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
   width: 100%;
   position: relative;
-  gap: 12px; // add some space between textarea and circle
+  gap: 12px;
+  flex-direction: row;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
 `;
 
 const CircleWrapper = styled.div`
@@ -43,14 +51,6 @@ const CircleWrapper = styled.div`
 const ProgressCircle = styled.svg`
   transform: rotate(0deg);
 `;
-
-//got error msg and was told to remove this
-// const CircleText = styled.text`
-//   font-size: 12px;
-//   fill: ${({ color }) => color};
-//   text-anchor: middle;
-//   dominant-baseline: middle;
-// `;
 
 export const InputArea = styled.textarea`
   width: 90%;
@@ -69,7 +69,12 @@ export const InputArea = styled.textarea`
     box-shadow: 0 0 5px #7a7b7b;
   }
   &::placeholder {
-    font-size: 13px;
+    font-size: 12px;
+  }
+
+    @media (max-width: 600px) {
+    width: 100%;
+    max-width: 100%;
   }
 `;
 
@@ -92,7 +97,7 @@ export const Button = styled.button`
   font-size: 13px;
   font-family: Roboto, sans-serif;
   letter-spacing: 0.2px;
-  margin: 15px 5px 5px;
+  margin: 10px 5px 5px;
   transition: transform 0.3s ease;
 
   &:hover {

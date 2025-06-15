@@ -61,6 +61,9 @@ export const Nav = () => {
         <NavItem>
           <StyledLink to='/thoughts'>Post</StyledLink>
         </NavItem>
+        <NavItem>
+          <StyledLink to='/MyLikes'>My Likes</StyledLink>
+        </NavItem>
       </NavList>
     </NavBar>
   );

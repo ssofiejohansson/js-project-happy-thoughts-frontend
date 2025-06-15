@@ -13,26 +13,25 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 10px;
 }
 
 h1 {
-  font-size: 52px;
+  font-size: clamp(2rem, 8vw, 52px);
   font-weight: 400;
   font-family: 'Chewy', Arial, sans-serif;
   color: #f4511e;
   padding: 10px;
 }
 
-/* h2,
+h2,
 h3 {
-  font-size: 22px;
-  font-weight: 400;
-  font-family: '', Arial, sans-serif;
+  font-size: clamp(1.2rem, 5vw, 20px);
   margin-bottom: 20px;
-} */
+}
 p {
-  font-family: '', Arial, sans-serif;
-  font-size: 14px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
   line-height: 1.5;
   color: #333;
 }
@@ -51,12 +50,5 @@ a:hover {
   body {
     min-height: 100dvh;
     padding: 10px;
-  }
-
-  h1,
-  h2,
-  h3 {
-    text-align: center;
-    padding: 5px;
   }
 }

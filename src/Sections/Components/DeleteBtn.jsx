@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 const DeleteButton = styled.button`
   position: absolute;
-  top: 4px;
-  right: 12px;
+  top: 2px;
+  right: 8px;
   background: none;
   border: none;
-  font-size: 44px;
+  font-size: 34px;
   cursor: pointer;
   color: #222;
-  line-height: 1;
+
   padding: 0;
   z-index: 2;
   transition: color 0.2s;
@@ -45,7 +45,7 @@ export const DeleteBtn = ({ thoughtId, onDelete }) => {
   };
 
   return (
-    <DeleteButton onClick={handleDelete} aria-label='Delete'>
+    <DeleteButton onClick={handleDelete} aria-label='Delete thought'>
       ×
     </DeleteButton>
   );
