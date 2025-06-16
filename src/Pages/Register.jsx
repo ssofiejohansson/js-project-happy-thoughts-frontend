@@ -14,7 +14,7 @@ import {
   SubmitButton,
 } from '../Sections/Components/Form';
 
-const API_URL = process.env.VITE_API_URL || 'http://localhost:8081';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081';
 
 export const Register = () => {
   const [username, setUsername] = useState('');

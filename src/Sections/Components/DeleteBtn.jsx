@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const API_URL = process.env.VITE_API_URL || 'http://localhost:8081';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081';
 
 const DeleteButton = styled.button`
   position: absolute;
