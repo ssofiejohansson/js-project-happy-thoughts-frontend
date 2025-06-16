@@ -158,11 +158,10 @@ export const Post = ({ onSubmit }) => {
     setError(value.length > maxLength ? 'Your thought is too long.' : '');
   };
 
-  const yourToken = localStorage.getItem('accessToken');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (message.trim() && message.length >= 1 && message.length <= maxLength) {
+    if (message.trim() && message.length >= 5 && message.length <= maxLength) {
       try {
         const response = await fetch(`${API_URL}/thoughts`, {
           method: 'POST',
@@ -188,7 +187,8 @@ export const Post = ({ onSubmit }) => {
         setShowAnimation(true);
         setTimeout(() => setShowAnimation(false), 3000);
       } catch (err) {
-        setError('Something went wrong. Please try again.', err);
+        setError('Something went wrong. Please try again.');
+        console.error(err);
       }
     } else {
       setError('Your thought must be between 5 and 140 characters.');

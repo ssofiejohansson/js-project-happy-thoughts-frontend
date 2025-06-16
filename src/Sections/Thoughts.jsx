@@ -48,7 +48,7 @@ export const Thoughts = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${API_URL}/thoughts`);
+    fetch(`${API_URL}/thoughts`)
       .then((res) => res.json())
       .then((data) => {
         setHappyThoughts(data);

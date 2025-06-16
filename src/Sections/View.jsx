@@ -48,7 +48,6 @@ const ActionsColumn = styled.div`
 
 export const View = ({
   thoughts,
-  onLike,
   setThoughts,
   handleDeleteThought,
   currentUserId,
