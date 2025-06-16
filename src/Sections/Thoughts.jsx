@@ -86,11 +86,11 @@ export const Thoughts = () => {
             Log out
           </Button>
         )}
-        {accessToken && (
+        {/* {accessToken && (
           <Button as={Link} to='/thoughts/likes'>
             My Likes
           </Button>
-        )}
+        )} */}
 
         <Post onSubmit={handleFormSubmit} />
         {loading ? (

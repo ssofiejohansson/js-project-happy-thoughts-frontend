@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Title, Button } from '../Sections/Post';
+import { Title } from '../Sections/Post';
 import { Container } from '../Sections/Thoughts';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { DotLottieWrapper } from '../Pages/Home';
-import styled from 'styled-components';
 import { Bubble } from '../Sections/Components/Bubble';
 import { useNavigate, Link } from 'react-router-dom';
 import {
