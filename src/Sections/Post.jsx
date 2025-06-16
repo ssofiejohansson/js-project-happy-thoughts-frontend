@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+const API_URL = process.env.VITE_API_URL || 'http://localhost:8081';
 
 export const PostContainer = styled.div`
   background-color: #f48fb1;
@@ -157,7 +157,6 @@ export const Post = ({ onSubmit }) => {
     setMessage(value);
     setError(value.length > maxLength ? 'Your thought is too long.' : '');
   };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();

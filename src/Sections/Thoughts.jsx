@@ -9,7 +9,7 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Button } from '../Sections/Components/Button';
 import { Link } from 'react-router-dom';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+const API_URL = process.env.VITE_API_URL || 'http://localhost:8081';
 
 export const Container = styled.div`
   display: flex;
