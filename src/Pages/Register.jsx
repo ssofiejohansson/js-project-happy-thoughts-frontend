@@ -37,7 +37,7 @@ export const Register = () => {
         // Navigate to login with state after a short delay
         setTimeout(() => {
           navigate('/login', { state: { registered: true } });
-        }, 1200);
+        }, 3000);
       } else {
         setMessage(data.message || 'Registration failed');
       }
