@@ -17,6 +17,8 @@ const Hourglass = styled.div`
   animation: ${Rotate} 1.5s linear infinite;
 `;
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081';
+
 export const MyLikes = () => {
   const [likedThoughts, setLikedThoughts] = useState([]);
 
@@ -29,7 +31,7 @@ export const MyLikes = () => {
       return;
     }
 
-    fetch('http://localhost:8081/thoughts/likes', {
+    fetch(`${API_URL}/thoughts/likes`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

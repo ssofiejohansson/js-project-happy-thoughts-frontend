@@ -28,13 +28,16 @@ export const DotLottieWrapper = styled.div`
   }
 `;
 
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081';
+
 export const Home = () => {
   const [happyThoughts, setHappyThoughts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:8081/thoughts')
+    fetch(`${API_URL}/thoughts/`)
       .then((res) => res.json())
       .then((data) => {
         setHappyThoughts(data);
