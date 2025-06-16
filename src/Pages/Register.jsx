@@ -14,6 +14,9 @@ import {
   SubmitButton,
 } from '../Sections/Components/Form';
 
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+
 export const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -23,7 +26,7 @@ export const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8081/register', {
+      const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
