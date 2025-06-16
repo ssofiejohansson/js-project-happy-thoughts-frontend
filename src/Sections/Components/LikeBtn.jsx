@@ -65,7 +65,7 @@ export const LikeBtn = ({ thoughtId, hearts, onLike }) => {
     );
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(`${API_URL}/thoughts/${thoughtId}/like`, {
+      const response = await fetch(`${API_URL}/thoughts/${thoughtId}/likes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
